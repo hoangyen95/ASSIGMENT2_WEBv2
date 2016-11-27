@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<maincontent>
+  <headercontent>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>A</firstname>
+        <lastname>Nguy&#x1EC5;n</lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc                    </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>cxvx</firstname>
+        <lastname>fsdfdfsdf</lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>12134567890</phone>
+        <gender>0</gender>
+        <address>                    fcdzvxdv</address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>cxvx</firstname>
+        <lastname>fsdfdfsdf</lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>12134567890</phone>
+        <gender>0</gender>
+        <address>                    fcdzvxdv</address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>thuan</firstname>
+        <lastname>nguyen</lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc                    </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>nguyen</firstname>
+        <lastname>thuan</lastname>
+        <email>bkb@rdf.h</email>
+        <phone>1234567890</phone>
+        <gender>0</gender>
+        <address> bvcb                   </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>test2</firstname>
+        <lastname>test2</lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>test 2                    </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>test</firstname>
+        <lastname>test1</lastname>
+        <email>tankinhlk@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abcd      </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>B</firstname>
+        <lastname>Nguy&#x1EC5;n </lastname>
+        <email>thanhyen107@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc xyz                        </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>A</firstname>
+        <lastname>Nguy&#x1EC5;n </lastname>
+        <email>tankinh@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc xyz                        </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>A</firstname>
+        <lastname>Nguy&#x1EC5;n </lastname>
+        <email>tankinh@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc xyz                        </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="273xxxx">
+      <information>
+        <firstname>A</firstname>
+        <lastname>Nguy&#x1EC5;n </lastname>
+        <email>tankinh@gmail.com</email>
+        <phone>0123456789</phone>
+        <gender>0</gender>
+        <address>abc xyz                        </address>
+      </information>
+      <productList>
+        <product>
+          <productName>iPhone 7</productName>
+          <productNum>2</productNum>
+          <price>300$</price>
+        </product>
+      </productList>
+      <sumPrice>600$</sumPrice>
+    </DonHang>
+    <DonHang num="">
+      <infomation>
+        <firstname/>
+        <lastname/>
+        <email/>
+        <phone/>
+        <gender/>
+        <address/>
+      </infomation>
+      <productList>
+        <product>
+          <productName/>
+          <productNum/>
+          <price/>
+        </product>
+      </productList>
+      <sumPrice/>
+    </DonHang>
+  </headercontent>
+</maincontent>

@@ -1,0 +1,8 @@
+.bank {
+	width: 120px;
+	height: 100px;
+	
+}
+.bank:hover	{
+	border: 1px solid blue;
+}

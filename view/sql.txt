@@ -1,0 +1,23 @@
+CREATE TABLE `orders` (
+  `idOther` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date_buy` varchar(20) DEFAULT NULL,
+  `total` int(11) NOT NULL ,
+  PRIMARY KEY (`idOther`)
+ 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE `productorders` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `productID` int(11) unsigned NOT NULL,
+  `idOther` int(11) unsigned NOT NULL ,
+  `amount` int(11) NOT NULL ,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_orders_product` FOREIGN KEY (`productID`)
+  REFERENCES `product` (`productID`),
+  CONSTRAINT `fk_orders` FOREIGN KEY (`idOther`)
+  REFERENCES `orders` (`idOther`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
