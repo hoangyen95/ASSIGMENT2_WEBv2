@@ -27,6 +27,8 @@
     $sql4 = "DELETE FROM `image` WHERE productID = $a";
     $query4 = mysqli_query($conn, $sql4);
 
+    $sql5 = "DELETE FROM `productorders` WHERE productID = $a";
+    $query5 = mysqli_query($conn, $sql5);
 
     $sql1 = "DELETE FROM `product` WHERE productID = $a";
   

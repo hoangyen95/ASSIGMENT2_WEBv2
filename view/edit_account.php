@@ -65,7 +65,7 @@ if($query1){
     <h4 style="color:blue;font-weight:bold;text-align:center"> Chỉnh sửa thông tin cá nhân</h4>
     <form action="" method="POST">
       <div class="form-group row">
-        <label for="ten" class="col-sm-2 col-form-label">Tên</label>
+        <label for="ten" class="col-sm-2 col-form-label">Tên đăng nhập</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="ten" name="ten" value="<?php echo $row['username'] ?>" placeholder="Nguyễn Văn A">
         </div>
@@ -174,6 +174,7 @@ else
       $query = mysqli_query($conn, $sql);
       if($query){
         echo "<script>alert('edit success') </script>";
+        echo "<script>window.location='account.php'</script>";
       }
       else
         echo "false";

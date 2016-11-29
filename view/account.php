@@ -105,8 +105,8 @@
                  
                     <h4 style="color: blue;font-size: 16px;font-weight: bold;padding-left: 1em;">Địa chỉ nhận hàng</h4>
                     <fieldset class="field-address">
-                      <p style="padding-left: 1em;font-weight: bold;font-size: 20px"><?php echo $row['fullname']; ?></p>
-                      <p style="padding-left: 1em;"><?php echo $row['address']; ?></p>
+                      <p style="padding-left: 1em;">Khách hàng: <?php echo $row['username']; ?></p>
+                      <p style="padding-left: 1em;">Địa chỉ: <?php echo $row['address']; ?></p>
                       <p style="padding-left: 1em;">Điện thoại: <?php echo $row['phone']; ?></p>
                     </fieldset>
                 <?php

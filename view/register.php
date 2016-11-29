@@ -50,17 +50,12 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="firstname" class="col-lg-4 control-label">Tên <span class="require">*</span></label>
+                  <label for="fullname" class="col-lg-4 control-label">Tên đầy đủ<span class="require">*</span></label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" id="firstname" name="firstname">
+                    <input type="text" class="form-control" id="fullname" name="fullname">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="lastname" class="col-lg-4 control-label">Họ đệm <span class="require">*</span></label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="lastname" name="lastname">
-                  </div>
-                </div>
+                
                 <div class="form-group">
                   <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                   <div class="col-lg-8">
@@ -122,8 +117,8 @@
                 $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
                 $addr = mysqli_real_escape_string($conn, $_POST["addr"]);
                 $username = mysqli_real_escape_string($conn, $_POST["username"]);
-                $firstname = mysqli_real_escape_string($conn, $_POST["firstname"]);
-                $lastname = mysqli_real_escape_string($conn, $_POST["lastname"]);
+                $fullname = mysqli_real_escape_string($conn, $_POST["fullname"]);
+                
                 $email = mysqli_real_escape_string($conn, $_POST["email"]);
                 $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
                 $re_password = mysqli_real_escape_string($conn, md5($_POST["re_password"]));
@@ -146,19 +141,14 @@
                   $check1=true;
                 }
 
-                if(empty($firstname)){
+                if(empty($fullname)){
                   $error[] = "Tên không được bỏ trống.";
                 }
                 else{
                   $check2=true;
                 }
 
-                if(empty($lastname)){
-                  $error[] = "Họ đệm không được bỏ trống.";
-                }
-                else{
-                  $check3=true;
-                }
+                
 
                 $sql = "SELECT * FROM `User` WHERE (email = '$email')";
                 $query= mysqli_query($conn, $sql);
@@ -221,8 +211,8 @@
                   $check8=true;
                 }
               
-              if($check1&&$check2&&$check3&&$check4&&$check5&&$check6&&$check7&&$check8){
-              $fullname = $firstname . $lastname;
+              if($check1&&$check2&&$check4&&$check5&&$check6&&$check7&&$check8){
+              
 
               $conn->set_charset("utf8");
               //save form to database
@@ -231,6 +221,7 @@
 
               if(mysqli_query($conn, $sql)){
                 echo "<script>alert('register success')</script>";
+                echo "<script>window.location='login.php'</script>";
                 
               }
 

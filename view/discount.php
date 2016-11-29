@@ -52,7 +52,7 @@
                    <?php
          include '../libs/connect.php';
          $mysqli = new mysqli("localhost","root","","webdata5");
-
+         $conn->set_charset("utf8");
          //lấy sản phẩm trong database
          $getdata = "select count(productID) as total from product";
          $query1 = $mysqli->query($getdata);

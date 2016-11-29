@@ -94,6 +94,7 @@
                   <?php
                   if (isset($_GET['idcatogory']))
                   { 
+                    $mysqli->set_charset("utf8");
                     $sql="select * from product p, category c where p.categoryID=c.categoryID and c.categoryID=($id)";
                     $query=$mysqli->query($sql);
                     if(mysqli_num_rows($query) > 0)

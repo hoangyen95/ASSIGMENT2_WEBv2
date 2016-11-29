@@ -210,7 +210,7 @@
           <div class="form-group">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
               <input class="btn btn-success" type="submit" name="submit" value="TẠO">
-              <input class="btn btn-warning" type="reset" name="reset" value="HỦY">
+              <a href="admin.php?categoryid=<?php echo $row['categoryID'] ?>" class="btn btn-warning" type="reset" name="reset">HỦY</a>
             </div>
           </div>
         </form>

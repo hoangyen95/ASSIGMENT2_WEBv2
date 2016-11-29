@@ -107,9 +107,14 @@
         echo "<td>" . $row['dateupdate'] . "</td>";
         echo '<td><a href="edit.php?productid=' . $id . '">'; 
         echo "<span class='glyphicon glyphicon-pencil'></span></a>";
-        echo ' <a href="delete.php?productid='  . $id . '">';
+        echo ' <a href="delete.php?productid='  . $id . '" onclick="myFunction();">';
+        // echo ' <a onclick="myFunction();">';
         echo "<span class='glyphicon glyphicon-trash'></span></a></td>";
         echo "</tr>";
+        ?>
+        
+</script>
+        <?php
       }
     }
   else {?>

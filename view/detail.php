@@ -34,6 +34,7 @@
   <?php include '../src/header.php' ?>
   <?php
     include '../libs/connect.php';
+    $conn->set_charset("utf8");
     $stt = (int)$_GET['item'];
     $queryname = mysqli_query($conn, "select * from product where productID = $stt");
     $rowname = mysqli_fetch_array($queryname);

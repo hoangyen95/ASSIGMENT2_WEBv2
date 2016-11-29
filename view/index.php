@@ -232,6 +232,7 @@
                 echo '<li><a><span>'.$i.'</span></a></li>';
               }
               else{
+                $mysqli->set_charset("utf8");
                 echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
               }
               
@@ -239,6 +240,7 @@
 
             // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
             if ($current_page < $total_page && $total_page > 1){
+              $mysqli->set_charset("utf8");
               echo '<li><a href="index.php?page='.($current_page+1).'">Trang sau</a></li>';
             }
             ?>
@@ -289,6 +291,7 @@
         <a href="#" class="list-group-item active">Sản phẩm mới</a>
         <div class="list-group-item">
           <?php 
+          $mysqli->set_charset("utf8");
           $sql="select * from product order by productID desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
@@ -360,42 +363,42 @@
         $start = ($current_page - 1) * $limit;
 
         //lấy dữ liệu cho từng trang
-        $sql1 = "select * from product where discount > 0 order by discount desc LIMIT $start, $limit";
-        $query1 = $mysqli->query($sql1);
+        $sqld = "select * from product where discount > 0 order by discount desc LIMIT $start, $limit";
+        $queryd = $mysqli->query($sqld);
         
         //var_dump($query);
 
-        if(mysqli_num_rows($query1) > 0)
+        if(mysqli_num_rows($queryd) > 0)
         {
-          while($row=mysqli_fetch_array($query1))
+          while($rowd=mysqli_fetch_array($queryd))
           {
 
             echo "<div class=' col-lg-4 col-md-4 col-sm-6 hero-feature'>";
             echo "<div class='product-item'>";
             echo "<div class='img-wrapper' style='height:25em'>";
-            echo "<img src='../img/$row[image]'class='img-responsive' alt='iphone'>";
+            echo "<img src='../img/$rowd[image]'class='img-responsive' alt='iphone'>";
             echo "<div>";
             echo "<br>";
-            $id = (int)$row['productID'];
-            $sql1 = "select * from thongso where productID = $id";
-            $query1 = mysqli_query($conn, $sql1);
-            while($row1 = mysqli_fetch_array($query1)){
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Màn Hình: " . $row1['manhinh'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Hệ điều hành: " . $row1['HDD'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Camera: " . $row1['CMRTruoc'] . ", </p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Camera sau: " . $row1['CMRSau'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>RAM: " . $row1['RAM'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>ROM: " . $row1['ROM'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Thẻ sim: " . $row1['thesim'] . "</p>";
-            echo "<p style='padding-left:10px;text-align:left; color: white'>Dung lượng Pin: " . $row1['dungluongPIN'] . "</p>";
+            $id = (int)$rowd['productID'];
+            $sqld1 = "select * from thongso where productID = $id";
+            $queryd1 = mysqli_query($conn, $sqld1);
+            while($rowd1 = mysqli_fetch_array($queryd1)){
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Màn Hình: " . $rowd1['manhinh'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Hệ điều hành: " . $rowd1['HDD'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Camera: " . $rowd1['CMRTruoc'] . ", </p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Camera sau: " . $rowd1['CMRSau'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>RAM: " . $rowd1['RAM'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>ROM: " . $rowd1['ROM'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Thẻ sim: " . $rowd1['thesim'] . "</p>";
+            echo "<p style='padding-left:10px;text-align:left; color: white'>Dung lượng Pin: " . $rowd1['dungluongPIN'] . "</p>";
           }
             echo "<br>";
-            echo "<a href='detail.php?item=$row[productID]' class='btn btn-default fancybox-fast-view'>Chi tiết</a>";
+            echo "<a href='detail.php?item=$rowd[productID]' class='btn btn-default fancybox-fast-view'>Chi tiết</a>";
             echo "</div>";
             echo "</div>";
-            echo "<h3><a href='detail.php?item=$row[productID]'>$row[productName]</a></h3>";
-            echo "<div class='price'>$row[price]"."đ</div>";
-            echo "<a href='../action/addcart.php?item=$row[productID]' class='btn btn-default add'>MUA NGAY</a>"   ; 
+            echo "<h3><a href='detail.php?item=$rowd[productID]'>$rowd[productName]</a></h3>";
+            echo "<div class='price'>$rowd[price]"."đ</div>";
+            echo "<a href='../action/addcart.php?item=$rowd[productID]' class='btn btn-default add'>MUA NGAY</a>"   ; 
             echo "</div>";
             echo "</div>";
           }
@@ -483,7 +486,8 @@
       <div class="list-group">
         <a href="#" class="list-group-item active">Sản phẩm mới</a>
         <div class="list-group-item">
-          <?php 
+          <?php
+          $mysqli->set_charset("utf8"); 
           $sql="select * from product order by productID desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
@@ -679,6 +683,7 @@
         <a href="#" class="list-group-item active">Sản phẩm mới</a>
         <div class="list-group-item">
           <?php 
+          $conn->set_charset("utf8");
           $sql="select * from product order by productID desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
