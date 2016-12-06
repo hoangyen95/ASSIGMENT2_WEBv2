@@ -56,6 +56,7 @@
             <?php
               $conn->set_charset("utf8");
               $user_id = $_SESSION['user_id'];
+              
               $sql = "select * from orders where is_customer = $user_id";
               $query = mysqli_query($conn, $sql);
               if(mysqli_num_rows($query) > 0){

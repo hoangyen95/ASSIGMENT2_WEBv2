@@ -54,13 +54,14 @@
             <li><a href="adcategory.php">Sản phẩm</a></li>
             <li><a href="adcustomer.php">Khách hàng</a></li>
             <li><a href="bill.php">Đơn hàng</a></li>
+            <li><a href="contact.php">Phản hồi</a></li>
             
           </ul>
         </div>
     </div>
     <div class="col-md-9">
       <h3 style="text-align:center;font-weight:bold;color:orange">CHI TIẾT SẢN PHẨM</h3>
-      <a href="insert.php" style="float:right;background::#94CB32;" class="btn btn-success">Thêm sản phẩm mới</a>
+      <a href="insert.php?categoryid=<?php echo isset($_GET['categoryid']) ? (int)$_GET['categoryid'] : '1'?>"" style="float:right;background::#94CB32;" class="btn btn-success">Thêm sản phẩm mới</a>
       <br>
       <br>
       <table class="table table-bordered">

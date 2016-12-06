@@ -174,6 +174,7 @@
             <li><a href="../view/adcategory.php">Sản phẩm</a></li>
             <li><a href="../view/adcustomer.php">Khách hàng</a></li>
             <li><a href="../view/bill.php">Đơn hàng</a></li>
+            <li><a href="../view/contact.php">Phản hồi</a></li>
             
           </ul>
         </div>

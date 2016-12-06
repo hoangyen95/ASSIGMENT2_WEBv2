@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Thêm loại sản phẩm</title>
+  <title>Phản hồi khách hàng</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -59,29 +59,33 @@
       </div>
     </div>
     <div class="col-md-9">
-      <h3 style="text-align:center;font-weight:bold;color:orange">QUẢN LÝ SẢN PHẨM</h3>
-      <a href="../action/insertCategory.php" style="float:right;background:#94CB32;" class="btn btn-success"> Thêm loại sản phẩm</a>
+      <h3 style="text-align:center;font-weight:bold;color:orange">PHẢN HỒI KHÁCH HÀNG</h3>
+      
       <br>
       <br>
       <table class="table table-bordered">
         <tr>
           <th class="active" style="text-align:center">ID</th>
-          <th class="active" style="text-align:center">Tên Loại Sản Phẩm</th>
-          <th class="active" style="text-align:center">Chi tiết</th>
+          <th class="active" style="text-align:center">Tiêu đề</th>
+          <th class="active" style="text-align:center">Nội dung</th>
+          <th class="active" style="text-align:center">Phản hồi</th>
           <th class="active" style="text-align:center">Xóa</th>
         </tr>           
         <?php 
-        $sql = "SELECT `categoryID`, `categoryName` FROM `category`";
+        $sql = "SELECT * from contact";
+        $conn->set_charset("utf8");
         $query = mysqli_query($conn, $sql);
         $result = mysqli_num_rows($query);
         if($result > 0){
           while($row = mysqli_fetch_assoc($query)){
-            $id = $row['categoryID'];
-            $name = $row['categoryName'];
+            $id = $row['contactID'];
+            $title = $row['title'];
+            $content = $row['content'];
             echo "<tr>";
             echo "<td>" . $id . "</td>";
-            echo "<td>" . $name . "</td>";
-            echo "<td><a href='admin.php?categoryid=" . $id . "'><span class='glyphicon glyphicon-tag'></span></a></td>";
+            echo "<td>" . $title . "</td>";
+            echo "<td>" . $content . "</td>";
+            echo "<td><a onclick='redirect();'><span class='glyphicon glyphicon-tag'></span></a></td>";
             echo "<td><button name='delete"  . $id . "' onclick='myFunction(". $id . ");' style='border:none;background-color:#ffffff'><span class='glyphicon glyphicon-trash'></span></button></td>";
             echo "</tr>";
           }
@@ -94,10 +98,15 @@
   </div>
   <script type="text/javascript">
     function myFunction(id){
-      if(confirm("Bạn chắc chắn muốn xóa loại sản phẩm này?") == true){
-        window.location = "../action/del_category.php?categoryid=" + id
+      if(confirm("Bạn chắc chắn muốn xóa phản hồi này?") == true){
+        window.location = "../action/del_contact.php?contactid=" + id
       }
     }
+
+    function redirect(){
+      window.location = 'https://www.mail.google.com';
+    }
+            
   </script>
   <?php include '../src/footer.php' ?>
 </body>

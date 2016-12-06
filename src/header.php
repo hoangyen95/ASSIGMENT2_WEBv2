@@ -16,6 +16,7 @@
         else
         {
           $user_id = intval($_SESSION['user_id']);
+          $conn->set_charset("utf8");
           $sql_query = mysqli_query($conn, "SELECT * FROM user WHERE id='{$user_id}'");
           $member = mysqli_fetch_array( $sql_query );
           
@@ -81,15 +82,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <?php
-           echo "<li><a href='category.php?idcatogory=1'>Sony</a></li>";
-           echo "<li><a href='category.php?idcatogory=2'>iPhone</a></li>";
-           echo "<li><a href='category.php?idcatogory=3'>Samsung</a></li>";
-           echo "<li><a href='category.php?idcatogory=4'>Asus</a></li>";
-           echo "<li><a href='category.php?idcatogory=5'>Oppo</a></li>";
-           echo "<li><a href='category.php?idcatogory=6'>HTC</a></li>";
-           echo "<li><a href='category.php?idcatogory=7'>Nokia</a></li>";
-           echo "<li><a href='category.php?idcatogory=8'>Lenovo</a></li>";
+           <?php
+              $getdata = "SELECT categoryID, categoryName FROM category";
+              $query1 = mysqli_query($conn, $getdata);
+              if ($query1) {
+                while($row = mysqli_fetch_assoc($query1)) {
+                  echo "<li><a href='category.php?idcatogory=" . $row["categoryID"] . "'>" . $row["categoryName"] . "</a></li>";
+                }
+              }
+              //$conn->close();
            ?>
           </ul>
         </li>

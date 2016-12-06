@@ -57,6 +57,7 @@
          <li><a href="../view/adcategory.php">Sản phẩm</a></li>
          <li><a href="../view/adcustomer.php">Khách hàng</a></li>
          <li><a href="../view/bill.php">Đơn hàng</a></li>
+         <li><a href="../view/contact.php">Phản hồi</a></li>
 
        </ul>
      </div>
@@ -99,18 +100,6 @@
         <label for="image2" class="col-lg-3 control-label">Hình 2 <span class="require">*</span></label>
         <div class="col-lg-8">
           <input id="image2" type="file" accept="image/" name="image2">
-        </div>
-      </div>
-      <!-- <div class="form-group">
-        <label for="image3" class="col-lg-3 control-label">Hình 3 <span class="require">*</span></label>
-        <div class="col-lg-8">
-          <input id="image3" type="file" accept="image/" name="image3">
-        </div>
-      </div> -->
-      <div class="form-group">
-        <label for="category" class="col-lg-3 control-label">Loại sản phẩm <span class="require">*</span></label>
-        <div class="col-lg-8">
-          <input type="number" class="form-control" id="category" name="category" placeholder="1">
         </div>
       </div>
       <div class="form-group">
@@ -189,7 +178,7 @@
       <div class="form-group">
         <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
           <input class="btn btn-success" type="submit" name="submit" value="TẠO">
-          <a href="adcategory.php" class="btn btn-warning">HỦY</a>
+          <a href="admin.php?categoryid=<?php echo $_GET['categoryid'] ?>" class="btn btn-warning">HỦY</a>
         </div>
       </div>
     </form>
@@ -197,13 +186,10 @@
 </div>
 <?php
 if(isset($_POST['submit'])){
-  
-  // $id = mysqli_real_escape_string($conn, $_POST['idp']);
   $pname = mysqli_real_escape_string($conn, $_POST['pname']);
   $price = mysqli_real_escape_string($conn, $_POST['price']);
   $discount = mysqli_real_escape_string($conn, $_POST['discount']);
-
-  $category = mysqli_real_escape_string($conn, $_POST['category']);
+  $category = (int)$_GET['categoryid'];
   $soluong = mysqli_real_escape_string($conn, $_POST['soluong']);
   $mota = mysqli_real_escape_string($conn, $_POST['mota']);
   $thongso = mysqli_real_escape_string($conn, $_POST['thongso']);
@@ -215,146 +201,54 @@ if(isset($_POST['submit'])){
   $thesim = mysqli_real_escape_string($conn, $_POST['thesim']);
   $dungluong = mysqli_real_escape_string($conn, $_POST['dungluong']);
   $date = mysqli_real_escape_string($conn, $_POST['date']);
-   $bh= mysqli_real_escape_string($conn, $_POST['bh']);
+  $bh= mysqli_real_escape_string($conn, $_POST['bh']);
   
   $name = $_FILES['image']['name'] ;
   $name1 = $_FILES['image1']['name'];
   $name2 = $_FILES['image2']['name'];
   
-  $check1=$check2=$check3=$check4=$check5=$check6=$check7=$check8=$check9=$check10=false;
-  if(empty($name)){
-    echo "<script>alert('vui lòng nhập tên sản phẩm.')</script>";
+  $check1=$check2=false;
+  if(empty($name) || empty($price) || empty($discount) || empty($discount) || empty($soluong) || empty($mota) || empty($thongso) || empty($hdd) || empty($cmrt) || empty($cmrs) || empty($rom) || empty($ram) || empty($dungluong) || empty($date) || empty($bh)){
+    echo "<script>alert('Các ô thông tin sản phẩm không được để trống.')</script>";
   }
   else
     $check1=true;
-
-  if(empty($price)){
-    echo "<script>alert('vui lòng nhập giá sản phẩm.')</script>";
+  if(empty($name) || empty($name1) || empty($name2)){
+    echo "<script>alert('Vui lòng chọn tệp hình ảnh.')</script>";
   }
   else
     $check2=true;
-
-  if(empty($discount)){
-    $discount = 0;
-    $check3=true;
-  }
-  else
-    $check3=true;
-
-  if(empty($category)){
-    echo "<script>alert('vui lòng nhập tên loại sản phẩm.')</script>";
-  }
-  else
-    $check4=true;
-
-  if(empty($soluong)){
-    echo "<script>alert('vui lòng nhập số lượng sản phẩm.')</script>";
-  }
-  else
-    $check5=true;
-
-  if(empty($mota)){
-    echo "<script>alert('vui lòng nhập mô tả sản phẩm.')</script>";
-  }
-  else
-    $check6=true;
-
-  if(empty($thongso) || empty($hdd) || empty($cmrt) || empty($cmrs) || empty($rom) || empty($ram) || empty($dungluong)){
-    echo "<script>alert('vui lòng nhập thông số kỹ thuật của sản phẩm.')</script>";
-  }
-  else
-    $check7=true;
-
-  if(empty($date)){
-    echo "<script>alert('vui lòng chọn ngày thêm sản phẩm.')</script>";
-  }
-  else
-    $check8=true;
-  if(empty($bh)){
-    echo "<script>alert('vui lòng nhập thời gian bảo hành sản phẩm.')</script>";
-  }
-  else
-    $check9=true;
-
-  
-
-  if(empty($name) || empty($name1) || empty($name2)){
-    echo "<script>alert('vui lòng chọn tệp hình ảnh.')</script>";
-    
-  }
-  else
-    $check10=true;
-
-  $conn->set_charset("utf8");
-  if($check1&&$check2&&$check3&&$check4&&$check5&&$check6&&$check7&&$check8&&$check9&&$check10){ 
-  $sql = "INSERT INTO `product` (`productID`, `productName`, `description`, `price`, `discount`, `image`, `categoryID`, `dateupdate`, `soluonghientai`, `soluongconlai`,`thoigian_baohanh`) VALUES 
-  (NULL, '$pname', '$mota', $price, $discount, '{$name}', $category, '$date', $soluong, 20, $bh)";
-
-  // var_dump($sql);
-
-  $query = mysqli_query($conn, $sql);
-  $id=0;
-  if($query){
-    // echo "success";
+  if($check1&&$check2){ 
+    $sql = "INSERT INTO `product` (`productID`, `productName`, `description`, `price`, `discount`, `image`, `categoryID`, `dateupdate`, `soluonghientai`, `soluongconlai`,`thoigian_baohanh`) VALUES 
+    (NULL, '$pname', '$mota', $price, $discount, '{$name}', $category, '$date', $soluong, 20, $bh)";
+    $query = mysqli_query($conn, $sql);
+    $id=0;
+    if($query){
      $id = $conn->insert_id;
-  }
-  else
-    echo "<script>alert('thêm sản phẩm bị lỗi')</script>";
-  
+    }
+    else
+      echo "<script>alert('Thêm sản phẩm bị lỗi')</script>";
+    //chèn 3 hình nhỏ
+    $sql2 = "INSERT INTO `image` (`imageID`, `imageName`, `url`, `productID`, `choose`)VALUES ('', '$pname', '{$name1}', $id, 1);";
+    $query2 = mysqli_query($conn, $sql2);
 
-  //chèn 3 hình nhỏ
-  $sql2 = "INSERT INTO `image` (`imageID`, `imageName`, `url`, `productID`, `choose`) 
-           VALUES ('', '$pname', '{$name1}', $id, 1);";
-  $query2 = mysqli_query($conn, $sql2);
-  // var_dump($query2);
-
-  $sql3 = "INSERT INTO `image` (`imageID`, `imageName`, `url`, `productID`, `choose`)
-           VALUES ('', '$pname', '{$name2}', $id, 1)";
-  $query3 = mysqli_query($conn, $sql3);
-  // var_dump($query3);
-
-  // $sql4 = "INSERT INTO `image` (`imageID`, `imageName`, `url`, `productID`, `choose`)
-  //          VALUES ('', '$pname', '{$name3}', $id, 1)";
-  // $query4 = mysqli_query($conn, $sql4);
-  // var_dump($query4);
+    $sql3 = "INSERT INTO `image` (`imageID`, `imageName`, `url`, `productID`, `choose`)
+    VALUES ('', '$pname', '{$name2}', $id, 1)";
+    $query3 = mysqli_query($conn, $sql3);
 
   //insert thong so 
-  $sql5 = "INSERT INTO `ThongSo` (`thongsoID`, `productID`, `manhinh`, `HDD`, `CMRTruoc`, `CMRSau`, `RAM`, `ROM`, `thesim`, `dungluongPIN`)
-           VALUES ('', $id, '$thongso', '$hdd', '$cmrt', '$cmrs', '$ram', '$rom', '$thesim', '$dungluong')";
-
-  $query5 = mysqli_query($conn, $sql5);
-
-
-  // var_dump($query5);
-
-  //test in kqua ra màn hình 
-  // $sql1="SELECT * FROM `product` WHERE productID=22";
-  // $query1 = mysqli_query($conn, $sql1);
-  // if($query1){
-  //   if (mysqli_num_rows($query1) > 0) {
-  //   // output data of each row
-  //     while($row = mysqli_fetch_assoc($query1)) {
-
-  //       echo "<img id='my' height='150' width='320' src='../img/$row[image]' class='reponsive' alt='hello'> ";
-  //     }
-  //   } else {
-  //     echo "0 results";
-  //   }
-  // }
-
-  // else
-  //   echo "false";
-  echo "<script>alert('thêm sản phẩm thành công.')</script>";
+    $sql5 = "INSERT INTO `ThongSo` (`thongsoID`, `productID`, `manhinh`, `HDD`, `CMRTruoc`, `CMRSau`, `RAM`, `ROM`, `thesim`, `dungluongPIN`)
+    VALUES ('', $id, '$thongso', '$hdd', '$cmrt', '$cmrs', '$ram', '$rom', '$thesim', '$dungluong')";
+    $query5 = mysqli_query($conn, $sql5);
+    if($query5){
+      echo "<script>alert('Thêm sản phẩm thành công.')</script>";
+      echo "<script>window.location='admin.php?categoryid=" . (int)$_GET['categoryid'] . "'</script>";
+    }
+    else
+      echo "<script>alert('" . mysqli_error($conn) . "')</script>";
   }
-  else
-    echo "<script>alert('vui lòng nhập lại thông tin.')</script>";
 }
-
-
 ?>  
-
 <?php include '../src/footer.php' ?>
-
-
 </body>
 </html>

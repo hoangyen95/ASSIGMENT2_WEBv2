@@ -230,7 +230,7 @@
                 echo "<script>alert('register false')</script>";
                 
               }
-              mysqli_close($conn);
+              //mysqli_close($conn);
             }
             else
                echo "<script>alert('vui lòng nhập lại thông tin')</script>";
@@ -248,7 +248,7 @@
                         <?php
                         echo "<p style='color:red; font-weight:bold; font-size:16px;'>Information Error!</p>"; 
                         foreach($error as $loi) : ?>
-                        <?php echo  "<script>alert('".$loi."')</script>" ?>
+                        
                         <li><?php echo $loi ?></li>
                       <?php endforeach; ?>
                     </ul>

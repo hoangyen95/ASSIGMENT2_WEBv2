@@ -54,12 +54,14 @@
             <li><a href="adcategory.php">Sản phẩm</a></li>
             <li><a href="adcustomer.php">Khách hàng</a></li>
             <li><a href="bill.php">Đơn hàng</a></li>
+            <li><a href="contact.php">Phản hồi</a></li>
+            <li><a href="comment.php">Bình luận sản phẩm</a></li>
             
           </ul>
         </div>
     </div>
     <div class="col-md-9">
-      
+       <h3 style="text-align:center;font-weight:bold;color:orange">QUẢN LÝ KHÁCH HÀNG</h3>
       <br>
       <br>
       <table class="table table-bordered">
@@ -70,7 +72,7 @@
           <th class="active" style="text-align:center">Email</th>
           <th class="active" style="text-align:center">Địa Chỉ</th>
           <th class="active" style="text-align:center">Điện thoại</th>
-          
+          <th class="active" style="text-align:center">Xóa</th>
         
         </tr>
         
@@ -92,51 +94,23 @@
         echo "<td>" . $row['email'] . "</td>";
         echo "<td>" . $row['address'] . "</td>";
         echo "<td>" . $row['phone'] . "</td>";
-        
-      
-        echo "</tr>";
-      }
-    }
-  else
-    echo "false";
-
-    // echo $a;
-  //   $sql = "SELECT * FROM productorders po, product p , orders o 
-  //   WHERE po.productID =p.productID AND po.idOther = o.idOther";
-
-
-  //   $query = mysqli_query($conn, $sql);
-  //   $result = mysqli_num_rows($query);
-
-  //   if ($result > 0){
-  //     while($row = mysqli_fetch_assoc($query)){
-       
-  //       echo "<tr>";
-  //       echo "<td>" . $row['idOther'] . "</td>";
-  //       echo "<td>". $row['fullname']. "</td>";
-  //       echo "<td>". $row['email']. "</td>";
-  //       echo "<td>" . $row['address'] . "</td>";
-  //       echo "<td>" . $row['productName'] . "</td>";
-  //       echo "<td>" . $row['amount'] . "</td>";
-  //       echo "<td>" . ($row['price'] - $row['discount'] )*$row['amount']  . "</td>";
-  //       echo "<td>" . $row['date_buy'] . "</td>";
-  //       echo "<td>" . $row['total'] . "</td>";
-     
-  //       echo "</tr>";
-  //     }
-  //   }
-  // else
-  //   echo "false";
-  ?>
-
-  </table>
+      echo "<td><button name='delete"  . $row['id'] . "' onclick='myFunction(". $row['id'] . ");' style='border:none;background-color:#ffffff'><span class='glyphicon glyphicon-trash'></span></button></td>"; 
+            echo "</tr>";
+          }
+        }
+        else
+          echo "false";
+        ?>
+      </table>
     </div>
   </div>
+  <script type="text/javascript">
+    function myFunction(id){
+      if(confirm("Bạn chắc chắn muốn xóa thành viên này?") == true){
+        window.location= "../action/del_cus.php?userid=" + id
+      }
+    }
+  </script>
   <?php include '../src/footer.php' ?>
-
-
-
-
 </body>
-
 </html>

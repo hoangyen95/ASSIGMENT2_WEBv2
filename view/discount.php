@@ -34,27 +34,14 @@
         </div>
         
         <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-lg-9 col-md-9">
-              <ul class="nav nav-tabs">
-                <li><a data-toggle="tab">Sản phẩm HOT</a></li>
-                <li class="active"><a data-toggle="tab" href="#discount">Khuyến mãi</a></li>
-                <li><a data-toggle="tab">Sản phẩm mới</a></li>
-              </ul>
-            </div>
-          </div>
           <!-- Title -->
-          <div class="tab-content ">
-            <div id="home" class="tab-pane fade in active">
-              <div class="row">
                 <div class=" col-xs-12 col-sm-12 col-lg-9 col-md-9">
-                  <br>
                    <?php
          include '../libs/connect.php';
          $mysqli = new mysqli("localhost","root","","webdata5");
          $conn->set_charset("utf8");
          //lấy sản phẩm trong database
-         $getdata = "select count(productID) as total from product";
+         $getdata = "select count(productID) as total from product where discount > 0";
          $query1 = $mysqli->query($getdata);
 
          $row1 = mysqli_fetch_assoc($query1);
@@ -84,7 +71,7 @@
         $query1 = $mysqli->query($sql1);
         
         //var_dump($query);
-
+        if($query1){
         if(mysqli_num_rows($query1) > 0)
         {
           while($row=mysqli_fetch_array($query1))
@@ -122,7 +109,7 @@
 
         }
 
-
+}
         ?>
         <!--/show san pham len san pham HOT-->
 
@@ -167,7 +154,7 @@
           <a href="#" class="list-group-item active">Bán chạy nhất</a>
           <div class="list-group-item">
             <?php 
-            $sql1="select * from product order by discount desc";
+            $sql1="select * from product order by soluongbanduoc desc";
             $query1=$mysqli->query($sql1);
             if(mysqli_num_rows($query1) > 0)
             {
@@ -203,7 +190,7 @@
         <a href="#" class="list-group-item active">Sản phẩm mới</a>
         <div class="list-group-item">
           <?php 
-          $sql="select * from product order by productID desc";
+          $sql="select * from product order by dateupdate desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
           {

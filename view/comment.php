@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Thêm loại sản phẩm</title>
+  <title>Quản lý bình luận</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -59,29 +59,39 @@
       </div>
     </div>
     <div class="col-md-9">
-      <h3 style="text-align:center;font-weight:bold;color:orange">QUẢN LÝ SẢN PHẨM</h3>
-      <a href="../action/insertCategory.php" style="float:right;background:#94CB32;" class="btn btn-success"> Thêm loại sản phẩm</a>
+      <h3 style="text-align:center;font-weight:bold;color:orange">QUẢN LÝ BÌNH LUẬN</h3>
+      
       <br>
       <br>
       <table class="table table-bordered">
         <tr>
           <th class="active" style="text-align:center">ID</th>
-          <th class="active" style="text-align:center">Tên Loại Sản Phẩm</th>
-          <th class="active" style="text-align:center">Chi tiết</th>
+          <th class="active" style="text-align:center">Tên sản phẩm</th>
+          <th class="active" style="text-align:center">Bình luận</th>
           <th class="active" style="text-align:center">Xóa</th>
         </tr>           
         <?php 
-        $sql = "SELECT `categoryID`, `categoryName` FROM `category`";
+        $sql = "SELECT * FROM comment";
+        $conn->set_charset("utf8");
         $query = mysqli_query($conn, $sql);
         $result = mysqli_num_rows($query);
         if($result > 0){
           while($row = mysqli_fetch_assoc($query)){
-            $id = $row['categoryID'];
-            $name = $row['categoryName'];
+            $id = $row['commentID'];
+            $name = $row['content'];
             echo "<tr>";
             echo "<td>" . $id . "</td>";
+            $stt = (int)$row['productID'];
+
+            $query1 = mysqli_query($conn, "select * from product where productID = $stt");
+            if($query1){
+              while($row1=mysqli_fetch_array($query1)){
+                echo "<td>" . $row1['productName'] . "</td>";
+              }
+            }
+            else echo "<td>dsđs</td>";
             echo "<td>" . $name . "</td>";
-            echo "<td><a href='admin.php?categoryid=" . $id . "'><span class='glyphicon glyphicon-tag'></span></a></td>";
+            
             echo "<td><button name='delete"  . $id . "' onclick='myFunction(". $id . ");' style='border:none;background-color:#ffffff'><span class='glyphicon glyphicon-trash'></span></button></td>";
             echo "</tr>";
           }
@@ -94,8 +104,8 @@
   </div>
   <script type="text/javascript">
     function myFunction(id){
-      if(confirm("Bạn chắc chắn muốn xóa loại sản phẩm này?") == true){
-        window.location = "../action/del_category.php?categoryid=" + id
+      if(confirm("Bạn chắc chắn muốn xóa loại bình luận này?") == true){
+        window.location = "../action/del_comment.php?commentid=" + id
       }
     }
   </script>

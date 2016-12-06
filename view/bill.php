@@ -54,12 +54,13 @@
             <li><a href="adcategory.php">Sản phẩm</a></li>
             <li><a href="adcustomer.php">Khách hàng</a></li>
             <li><a href="bill.php">Đơn hàng</a></li>
-            
+            <li><a href="contact.php">Phản hồi</a></li>
+            <li><a href="comment.php">Bình luận sản phẩm</a></li>
           </ul>
         </div>
     </div>
     <div class="col-md-9">
-      
+       <h3 style="text-align:center;font-weight:bold;color:orange">QUẢN LÝ SẢN PHẨM</h3>
       <br>
       <br>
       <table class="table table-bordered">
@@ -72,6 +73,7 @@
           <th class="active" style="text-align:center">Ngày Mua</th>
           <th class="active" style="text-align:center">Tổng Tiền</th>
           <th class="active" style="text-align:center">Chi tiết</th>
+          <th class="active" style="text-align:center">Xóa</th>
         </tr>
         
       
@@ -93,6 +95,7 @@
         echo "<td>" . $row['date_buy'] . "</td>";
         echo "<td>" . $row['total'] . "</td>";
         echo "<td>" . "<a href = 'detailorder.php?id=$row[idOther]'><span class='glyphicon glyphicon-tag'></span></a>" . "</td>"; 
+        echo "<td><button name='delete"  . $row['idOther'] . "' onclick='myFunction(". $row['idOther'] . ");' style='border:none;background-color:#ffffff'><span class='glyphicon glyphicon-trash'></span></button></td>"; 
         echo "</tr>";
       }
     }
@@ -131,6 +134,13 @@
   </table>
     </div>
   </div>
+  <script type="text/javascript">
+    function myFunction(id){
+      if(confirm("Bạn chắc chắn muốn xóa thành viên này?") == true){
+        window.location= "../action/del_bill.php?orderid=" + id
+      }
+    }
+  </script>
   <?php include '../src/footer.php' ?>
 
 

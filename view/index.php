@@ -7,7 +7,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
+  <meta name="description" content="storeonline.me-Trang web shopping thiết bị điện tử">
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="keywords" content="iphone, sony, điện thoại, lenovo, oppo, asus, shopping, điện tử" />
+  <meta http-equiv="refresh" content="30">
   <meta name="author" content="">
 
   <title>Trang chủ</title>
@@ -34,14 +37,16 @@
           <ul>
            <h3>DANH MỤC</h3>
            <?php
-           echo "<li><a href='category.php?idcatogory=1'>Sony</a></li>";
-           echo "<li><a href='category.php?idcatogory=2'>iPhone</a></li>";
-           echo "<li><a href='category.php?idcatogory=3'>Samsung</a></li>";
-           echo "<li><a href='category.php?idcatogory=4'>Asus</a></li>";
-           echo "<li><a href='category.php?idcatogory=5'>Oppo</a></li>";
-           echo "<li><a href='category.php?idcatogory=6'>HTC</a></li>";
-           echo "<li><a href='category.php?idcatogory=7'>Nokia</a></li>";
-           echo "<li><a href='category.php?idcatogory=8'>Lenovo</a></li>";
+           include '../libs/connect.php';
+              //lấy sản phẩm trong database
+              $getdata = "SELECT categoryID, categoryName FROM category";
+              $query1 = mysqli_query($conn, $getdata);
+              if ($query1) {
+                while($row = mysqli_fetch_assoc($query1)) {
+                  echo "<li><a href='category.php?idcatogory=" . $row["categoryID"] . "'>" . $row["categoryName"] . "</a></li>";
+                }
+              }
+              
            ?>
          </ul>
        </div>
@@ -115,20 +120,28 @@
 </div>
 
 <br><br>
-
+<?php 
+ $tab = isset($_GET['tab']) ? $_GET['tab'] : 1;
+?>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-lg-9 col-md-9">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Sản phẩm HOT</a></li>
-        <li><a data-toggle="tab" href="#discount">Khuyến mãi</a></li>
-        <li><a data-toggle="tab" href="#new">Sản phẩm mới</a></li>
+
+      <?php 
+       echo  ($tab == '1') ?  '<li class="active"><a data-toggle="tab" href="#home">Sản phẩm HOT</a></li>':  '<li><a data-toggle="tab" href="#home">Sản phẩm HOT</a></li>';
+       echo ( $tab == '2') ? '<li class="active"><a data-toggle="tab" href="#discount">Khuyến mãi</a></li>': '<li><a data-toggle="tab" href="#discount">Khuyến mãi</a></li>';
+        echo ( $tab == '3') ? '<li class="active"><a data-toggle="tab" href="#new">Sản phẩm mới</a></li>': '<li><a data-toggle="tab" href="#new">Sản phẩm mới</a></li>'
+        ?>
+        
       </ul>
     </div>
   </div>
   <!-- Title -->
   <div class="tab-content ">
-    <div id="home" class="tab-pane fade in active">
+     <?php 
+        echo ( $tab == '1') ? ' <div id="home" class="tab-pane fade in active">': '<div id="home" class="tab-pane fade">';
+        ?>
       <div class="row">
         <div class=" col-xs-12 col-sm-12 col-lg-9 col-md-9">
          <br> <br>
@@ -140,7 +153,7 @@
          $mysqli = new mysqli("localhost","root","","webdata5");
          $conn->set_charset("utf8");
          //lấy sản phẩm trong database
-         $getdata = "select count(productID) as total from product";
+         $getdata = "select count(productID) as total from product where soluongbanduoc>=10";
          $query1 = $mysqli->query($getdata);
 
          $row1 = mysqli_fetch_assoc($query1);
@@ -166,7 +179,7 @@
         $start = ($current_page - 1) * $limit;
 
         //lấy dữ liệu cho từng trang
-        $sql = "select * from product LIMIT $start, $limit";
+        $sql = "select * from product WHERE soluongbanduoc>=10  order by soluongbanduoc desc LIMIT $start, $limit";
         $query = $mysqli->query($sql);
         
         //var_dump($query);
@@ -221,7 +234,7 @@
             //HIỂN THỊ PHÂN TRANG
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
              if ($current_page > 1 && $total_page > 1){
-              echo '<li><a href="index.php?page='.($current_page-1).'">Trang trước</a></li>';
+              echo '<li><a href="index.php?tab=1&page='.($current_page-1).'">Trang trước</a></li>';
             }
 
             // Lặp khoảng giữa
@@ -233,7 +246,7 @@
               }
               else{
                 $mysqli->set_charset("utf8");
-                echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+                echo '<li><a href="index.php?tab=1&page='.$i.'">'.$i.'</a></li>';
               }
               
             }
@@ -241,7 +254,7 @@
             // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
             if ($current_page < $total_page && $total_page > 1){
               $mysqli->set_charset("utf8");
-              echo '<li><a href="index.php?page='.($current_page+1).'">Trang sau</a></li>';
+              echo '<li><a href="index.php?tab=1&page='.($current_page+1).'">Trang sau</a></li>';
             }
             ?>
 
@@ -292,7 +305,7 @@
         <div class="list-group-item">
           <?php 
           $mysqli->set_charset("utf8");
-          $sql="select * from product order by productID desc";
+          $sql="select * from product order by dateupdate desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
           {
@@ -301,7 +314,7 @@
             {
               $count++;
               echo "<div class='single-wid-product'>";
-              echo "<a href='detail.php?item=$row[productID]'><img width='2em' height='2em' src='../img/$row[image]' alt='' class='product-thumb'></a>";
+              echo "<a href='detail.php?item=$row[productID]'><img width='2em' height='2em' src='../img/$row[image]' alt='image' class='product-thumb'></a>";
               echo "<h2><a href='detail.php?item=$row[productID]'>$row[productName]</a></h2>";
               echo "<div class='product-wid-rating'>";
               echo "<i class='fa fa-star'></i>";
@@ -324,27 +337,29 @@
   </div>
 </div>
 
-<div id="discount" class="tab-pane fade">
+<?php 
+        echo '<div id="discount"' . ($tab == '2' ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"') . '>';
+        ?>
   <div class="row">
     <div class=" col-xs-12 col-sm-12 col-lg-9 col-md-9">
      <br><br>
               <br> <br>
 
-         <!--show san pham len san pham HOT-->
+         <!--show san pham len san pham khuyen-->
 
          <?php
          include '../libs/connect.php';
          $mysqli = new mysqli("localhost","root","","webdata5");
          $conn->set_charset("utf8");
          //lấy sản phẩm trong database
-         $getdata = "select count(discount) as total from product";
+         $getdata = "select count(discount) as total from product where discount > 0";
          $query1 = $mysqli->query($getdata);
 
          $row1 = mysqli_fetch_assoc($query1);
          $total_records = $row1['total'];
 
         //TÌM LIMIT VÀ CURRENT_PAGE
-         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+         $current_page = isset($_GET['pagekm']) ? $_GET['pagekm'] : 1;
          $limit = 6;
 
         //TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -407,7 +422,7 @@
 
 
         ?>
-        <!--/show san pham len san pham HOT-->
+        <!--/show san pham len san pham km-->
 
 
         <div class="col-md-12 col-sm-12 col-xs-12 hero-feature">
@@ -418,7 +433,7 @@
             //HIỂN THỊ PHÂN TRANG
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
              if ($current_page > 1 && $total_page > 1){
-              echo '<li><a href="index.php?page='.($current_page-1).'">Trang trước</a></li>';
+              echo '<li><a href="index.php?tab=2&pagekm='.($current_page-1).'">Trang trước</a></li>';
             }
 
             // Lặp khoảng giữa
@@ -429,14 +444,14 @@
                 echo '<li><a><span>'.$i.'</span></a></li>';
               }
               else{
-                echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+                echo '<li><a href="index.php?tab=2&pagekm='.$i.'">'.$i.'</a></li>';
               }
               
             }
 
             // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
             if ($current_page < $total_page && $total_page > 1){
-              echo '<li><a href="index.php?page='.($current_page+1).'">Trang sau</a></li>';
+              echo '<li><a href="index.php?tab=2&pagekm='.($current_page+1).'">Trang sau</a></li>';
             }
             ?>
 
@@ -459,7 +474,7 @@
               {
                 $count++;
                 echo "<div class='single-wid-product'>";
-                echo "<a href='detail.php?item=$row[productID]'><img src='../img/$row[image]' alt='' class='product-thumb'></a>";
+                echo "<a href='detail.php?item=$row[productID]'><img src='../img/$row[image]' alt='$row[productName]' class='product-thumb'></a>";
                 echo "<h2><a href='detail.php?item=$row[productID]'>$row[productName]</a></h2>";
                 echo "<div class='product-wid-rating'>";
                 echo "<i class='fa fa-star'></i>";
@@ -488,7 +503,7 @@
         <div class="list-group-item">
           <?php
           $mysqli->set_charset("utf8"); 
-          $sql="select * from product order by productID desc";
+          $sql="select * from product order by dateupdate desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
           {
@@ -520,14 +535,16 @@
   </div>
 </div>
 
-<div id="new" class="tab-pane fade">
+<?php 
+        echo '<div id="new"' . ($tab == '3' ? 'class="tab-pane fade in active"' : 'class="tab-pane fade"') . '>';
+        ?>
   <div class="row">
     <div class=" col-xs-12 col-sm-12 col-lg-9 col-md-9">
      <br><br>
      <!--1-->
          <br> <br>
 
-         <!--show san pham len san pham HOT-->
+         <!--show san pham len san pham moi-->
 
          <?php
          include '../libs/connect.php';
@@ -541,7 +558,7 @@
          $total_records = $row1['total'];
 
         //TÌM LIMIT VÀ CURRENT_PAGE
-         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+         $current_page = isset($_GET['pagen']) ? $_GET['pagen'] : 1;
          $limit = 6;
 
         //TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -560,7 +577,7 @@
         $start = ($current_page - 1) * $limit;
 
         //lấy dữ liệu cho từng trang
-        $sql = "select * from product order by productID desc LIMIT $start, $limit";
+        $sql = "select * from product order by dateupdate desc LIMIT $start, $limit";
         $query = $mysqli->query($sql);
         
         //var_dump($query);
@@ -615,7 +632,7 @@
             //HIỂN THỊ PHÂN TRANG
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
              if ($current_page > 1 && $total_page > 1){
-              echo '<li><a href="index.php?page='.($current_page-1).'">Trang trước</a></li>';
+              echo '<li><a href="index.php?tab=3&pagen='.($current_page-1).'">Trang trước</a></li>';
             }
 
             // Lặp khoảng giữa
@@ -626,14 +643,14 @@
                 echo '<li><a><span>'.$i.'</span></a></li>';
               }
               else{
-                echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+                echo '<li><a href="index.php?tab=3&pagen='.$i.'">'.$i.'</a></li>';
               }
               
             }
 
             // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
             if ($current_page < $total_page && $total_page > 1){
-              echo '<li><a href="index.php?page='.($current_page+1).'">Trang sau</a></li>';
+              echo '<li><a href="index.php?tab=3&pagen='.($current_page+1).'">Trang sau</a></li>';
             }
             ?>
 
@@ -684,7 +701,7 @@
         <div class="list-group-item">
           <?php 
           $conn->set_charset("utf8");
-          $sql="select * from product order by productID desc";
+          $sql="select * from product order by dateupdate desc";
           $query=$mysqli->query($sql);
           if(mysqli_num_rows($query) > 0)
           {
